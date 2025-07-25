@@ -1,0 +1,38 @@
+<configuration>
+
+
+    <appender name="myConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+    <!--console logs-->
+        <encoder>
+            <pattern>
+                %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg %n
+<!--                -5 is before level there should be 5 spaces from the thread like info has one space after it and error has 0-->
+<!--                %n is new line
+                    and the prining sholud have a format so we are using pattern-->
+            </pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="myFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--fille logs-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>JournalApp-%d{yy-MM-dd_HH-mm}.%i.log</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>10</maxHistory>
+<!--            rollingpolicy is like we change file based on the size and no of files for that we will use this-->
+        </rollingPolicy>
+        <encoder>
+            <pattern>
+                %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg %n
+            </pattern>
+        </encoder>
+    </appender>
+
+
+
+    <root level="INFO">
+        <appender-ref ref="myConsoleAppender"/>
+        <appender-ref ref="myFileAppender"/>
+    </root>
+</configuration>
